@@ -1,0 +1,382 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   user-select: none;
+   -moz-user-select: none;
+   -webkit-user-select: none;
+   touch-action: none;
+   -ms-touch-action: none;
+   -webkit-touch-callout: none;
+   font-family: cursive;
+}
+
+:root {
+   --sw: 250px;
+   --sh: 230px;
+}
+
+body {
+   position: relative;
+   width: 100svw;
+   height: 100svh;
+   overflow: hidden;
+}
+
+#myCanvas {
+   position: absolute;
+   width: 100svw;
+   height: 100svh;
+   background: #000000;
+}
+
+#settings {
+   position: fixed;
+   left: 10px;
+   top: 10px;
+   background: white;
+   border-radius: 10px;
+   width: 40px;
+   height: 40px;
+   cursor: pointer;
+   outline: solid 1px #000000;
+   box-shadow: 0 0 5px #000000, 0 0 10px #000000, 0 0 15px #000000;
+   transition: height 200ms 0s, width 200ms 200ms;
+   overflow: hidden;
+   z-index: 10;
+}
+#settings.active {
+   width: auto;
+   width: var(--sw);
+   height: var(--sh);
+   border-radius: 5px;
+   background: white;
+   transition: height 200ms 200ms, width 200ms 0s;
+   padding-bottom: 0;
+   overflow: hidden;
+}
+
+#settings #openSettings {
+   position: absolute;
+   width: 40px;
+   height: 40px;
+   display: grid;
+   place-items: center;
+   font-size: 22px;
+   pointer-events: auto;
+   z-index: 3;
+   opacity: 1;
+   transition: opacity 300ms 600ms;
+}
+#settings.active #openSettings {
+   position: absolute;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 100ms 0ms;
+}
+#openSettings svg {
+   pointer-events: none;
+}
+#settings #insetAll {
+   position: relative;
+   width: 100%;
+   height: 100%;
+   padding: 10px;
+   background: white;
+   z-index: 2;
+   overflow: hidden;
+}
+#settings .big {
+   position: relative;
+   width: calc(var(--sw) - 20px);
+   font-size: 20px;
+   padding-bottom: 8px;
+   text-align: center;
+   font-family: monospace;
+   font-weight: bold;
+   text-transform: uppercase;
+   color: #000;
+}
+#settings #option-list {
+   position: relative;
+   width: 100%;
+   display: flex;
+   gap: 8px;
+   flex-direction: column;
+}
+#settings #option-list .option {
+   position: relative;
+   width: 100%;
+   height: 22px;
+   display: grid;
+   align-items: center;
+   padding: 0 12px;
+   background: linear-gradient(
+      to right,
+      #00000000,
+      rgba(0, 0, 0, 0.3),
+      #00000000,
+      #00000000
+   );
+   opacity: 1;
+}
+#settings #option-list .option.g {
+   grid-template-columns: auto 70px;
+}
+#settings #option-list .option.l {
+   grid-template-columns: 110px 1fr;
+}
+#settings #option-list .o-name {
+   position: relative;
+   width: 100%;
+   display: flex;
+   font-size: 12px;
+   gap: 5px;
+   align-items: center;
+}
+#settings #option-list .o-name span {
+   color: #ff6600;
+   background: #ffffff88;
+   padding: 0px 3px;
+   border-radius: 5px;
+   font-weight: 900;
+}
+#settings #option-list .o-button {
+   position: relative;
+   width: 100%;
+   display: flex;
+   justify-content: end;
+   align-items: center;
+}
+#settings #option-list .input-box {
+   position: relative;
+   width: 100%;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+}
+#buttonReset {
+   position: relative;
+   padding: 3px 8px;
+   border-style: none;
+   outline: none;
+   border-radius: 5px;
+   background: linear-gradient(335deg, #ff4d0077, #ffdd0077);
+   cursor: pointer;
+   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+   border-bottom: solid 2px #ff440077;
+   box-shadow: 1px 1px 2px #000000;
+   transition: box-shadow ease-in-out 300ms;
+}
+#buttonReset:hover {
+   box-shadow: 1px 1px 3px #000000, 2px 2px 3px #000000;
+}
+
+/* -------------- Toggle Button Design ------------ */
+.button-box {
+   position: relative;
+   width: 200px;
+   height: 80px;
+   display: grid;
+   place-items: center;
+   zoom: 0.25;
+   -moz-transform: scale(0.25);
+}
+.button-box .button {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   border-radius: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+   background-color: #aaa;
+   border: solid 4px #c2c2c2;
+   box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2),
+      inset 0 6px 16px rgba(0, 0, 0, 0.2), inset 0 -3px 3px rgba(0, 0, 0, 0.2);
+   transition: ease-in-out 0.3s background-color;
+}
+.button-box .button .inner {
+   position: relative;
+   width: 94%;
+   height: 84%;
+   display: flex;
+   left: 0;
+   align-items: center;
+   transition: ease-in-out 0.3s;
+}
+
+.button-box .button .inner .thumb {
+   position: relative;
+   height: 100%;
+   width: 75px;
+   background: linear-gradient(335deg, #fff, #ccc);
+   border-radius: 22px;
+   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+   transition: ease-in-out 0.3s background;
+}
+.button-box .button .inner .thumb::before {
+   content: "OFF";
+   position: absolute;
+   height: calc(100% - 4px);
+   width: calc(100% - 4px);
+   margin: 2px;
+   display: grid;
+   place-items: center;
+   font-family: Cambria, Cochin, "Times New Roman", serif;
+   font-weight: 900;
+   font-size: 1.5rem;
+   color: #000;
+   background: linear-gradient(to bottom right, #efefef, #d5d5d5);
+   border-radius: 20px;
+   transition: ease-in-out 0.3s background, ease-in-out 0.3s color,
+      ease-in-out 0.3s content;
+}
+.button-box.active .button {
+   background-color: #00e16d;
+}
+.button-box.active .button .inner {
+   left: calc(100% - 87px);
+}
+.button-box.active .button .inner .thumb::before {
+   content: "ON";
+   text-shadow: 0 0 1px #00e16d;
+   color: #00e16d;
+}
+
+/* --------------------- range input ------------------- */
+.input-box input[type="range"] {
+   position: absolute;
+   -webkit-appearance: none;
+   width: 80%;
+   height: 100%;
+   background: transparent;
+}
+.input-box input[type="range"]:focus {
+   outline: none;
+}
+.input-box input[type="range"]::-webkit-slider-runnable-track {
+   width: 100%;
+   height: 18px;
+   cursor: pointer;
+   animate: 0.2s;
+   border-radius: 6px;
+   background: #b6b6b6;
+   box-shadow: inset 1px 1px 2px #00000077;
+   border: 1px solid #707070;
+}
+.input-box input[type="range"]::-webkit-slider-thumb {
+   height: 14px;
+   width: 20px;
+   -webkit-appearance: none;
+   margin-top: 1px;
+   background: linear-gradient(335deg, #fff, #ccc);
+   cursor: pointer;
+   border-radius: 22px;
+   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+.input-box input[type="range"]:focus::-webkit-slider-runnable-track {
+   background: #b6b6b6;
+   box-shadow: inset 1px 1px 2px #00000077;
+   border: 1px solid #707070;
+}
+.input-box input[type="range"]::-moz-range-track {
+   width: 100%;
+   height: 16px;
+   cursor: pointer;
+   animate: 0.2s;
+   border-radius: 6px;
+   background: #b6b6b6;
+   box-shadow: inset 1px 1px 2px #00000077;
+   border: 1px solid #707070;
+}
+.input-box input[type="range"]::-moz-range-thumb {
+   box-shadow: 0px 0px 0px #828282;
+   border: 1px solid #8a8a8a;
+   height: 12px;
+   width: 20px;
+   border-radius: 10px;
+   background: #0700da;
+   cursor: pointer;
+}
+.input-box input[type="range"]::-ms-track {
+   width: 100%;
+   height: 16px;
+   cursor: pointer;
+   animate: 0.2s;
+   background: transparent;
+   border-color: transparent;
+   color: transparent;
+}
+.input-box input[type="range"]::-ms-fill-lower {
+   background: #b6b6b6;
+   border: 1px solid #8a8a8a;
+   border-radius: 12px;
+   box-shadow: 0px 0px 0px #000000;
+}
+.input-box input[type="range"]::-ms-fill-upper {
+   background: #b6b6b6;
+   border: 1px solid #8a8a8a;
+   border-radius: 12px;
+   box-shadow: 0px 0px 0px #000000;
+}
+.input-box input[type="range"]::-ms-thumb {
+   margin-top: 1px;
+   box-shadow: 0px 0px 0px #828282;
+   border: 1px solid #8a8a8a;
+   height: 12px;
+   width: 20px;
+   border-radius: 10px;
+   background: #0700da;
+   cursor: pointer;
+}
+.input-box input[type="range"]:focus::-ms-fill-lower {
+   background: #b6b6b6;
+}
+.input-box input[type="range"]:focus::-ms-fill-upper {
+   background: #b6b6b6;
+}
+
+#allColors {
+   position: fixed;
+   right: 10px;
+   top: 10px;
+   display: none;
+   z-index: 9;
+   padding: 5px;
+   background: linear-gradient(to bottom, #fff, #ccc);
+   border-radius: 5px;
+}
+#allColors.active {
+   display: block;
+}
+.color-options {
+   position: relative;
+   display: flex;
+   gap: 5px;
+}
+.color-options .color {
+   position: relative;
+   height: 25px;
+   width: 25px;
+   border-radius: 10px;
+   background: #000;
+   box-shadow: inset 0 0 0 #fff;
+   outline: none;
+   transition: ease-in-out 200ms box-shadow, ease-in-out 200ms outline;
+   cursor: pointer;
+}
+.color-options .color.active {
+   outline: 3px solid #777;
+   box-shadow: inset 0 0 5px #fff;
+}
+/* ---------- copyright ------------ */
+#copyright {
+   margin-right: 10px;
+   margin-top: 10px;
+   text-align: end;
+   font-size: 12px;
+   font-family: fantasy;
+   color: #bbb;
+}
