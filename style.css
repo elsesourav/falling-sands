@@ -121,7 +121,7 @@ body {
    opacity: 1;
 }
 #settings #option-list .option.g {
-   grid-template-columns: auto 70px;
+   grid-template-columns: auto 100px;
 }
 #settings #option-list .option.l {
    grid-template-columns: 110px 1fr;
@@ -157,6 +157,8 @@ body {
 }
 #buttonReset {
    position: relative;
+   width: 84px;
+   top: -2px;
    padding: 3px 8px;
    border-style: none;
    outline: none;
