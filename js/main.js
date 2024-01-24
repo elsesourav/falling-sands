@@ -3,7 +3,7 @@ const ctx = cvs.getContext("2d");
 
 let FPS = 60;
 let SCALE_SIZE = 4;
-let threshold = 5;
+let threshold = 4;
 
 const WIN_W = window.innerWidth;
 const WIN_H = window.innerHeight;

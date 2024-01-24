@@ -113,8 +113,9 @@ class World {
    }
 
    update() {
-      if (this.isHolding && this.counter++ % 3 == 0) {
-         this.colorI += 2;
+      if (this.counter % 3 == 0) this.colorI++;
+      
+      if (this.isHolding && this.counter++ % 2 == 0) {
          if (this.colorI > 360) this.colorI = 0;
          if (!this.blockRandomColor) this.color = `hsl(${this.colorI}, 100%, 60%)`;
          this.#setSend();
