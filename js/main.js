@@ -2,8 +2,8 @@ const cvs = document.getElementById("myCanvas");
 const ctx = cvs.getContext("2d");
 
 let FPS = 60;
-let SCALE_SIZE = 3;
-let threshold = 10;
+let SCALE_SIZE = 4;
+let threshold = 5;
 
 const WIN_W = window.innerWidth;
 const WIN_H = window.innerHeight;

@@ -28,6 +28,18 @@ inputSpeed.addEventListener("change", (e) => {
    ani.updateFPS(FPS);
 });
 
+inputThreshold.addEventListener("input", (e) => {
+   valueThreshold.innerText = Number(e.target.value);
+});
+
+inputSize.addEventListener("input", (e) => {
+   valueSize.innerText = Number(e.target.value);
+});
+
+inputSpeed.addEventListener("input", (e) => {
+   valueSpeed.innerText = Number(e.target.value);
+});
+
 const colors = ["#ff0000", "#00ff00", "#0000ff", "#ff00ff", "#00ffff", "#ffff00", "#ff4500", "#800080", "#008080", "#ff8c00", "#ffffff", "#222222"];
 let colorI = 0
 let isRabdomColor = true;
