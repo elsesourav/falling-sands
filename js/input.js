@@ -1,6 +1,6 @@
 /* ------------------ settings -------------- */
 buttonReset.addEventListener("click", () => {
-   world = new World(CVS_WIDTH, CVS_HEIGHT, SCALE_SIZE, threshold);
+   world = new World(CVS_WIDTH, CVS_HEIGHT, SCALE_SIZE, threshold, FPS);
 })
 
 buttonRandomColor.addEventListener("click", () => {
@@ -19,12 +19,12 @@ inputSize.addEventListener("change", (e) => {
    valueSize.innerText = SCALE_SIZE = value;
    CVS_WIDTH = Math.floor(WIN_W / SCALE_SIZE);
    CVS_HEIGHT = Math.floor(WIN_H / SCALE_SIZE);
-   world = new World(CVS_WIDTH, CVS_HEIGHT, SCALE_SIZE, threshold);
+   world = new World(CVS_WIDTH, CVS_HEIGHT, SCALE_SIZE, threshold, FPS);
 });
 
 inputSpeed.addEventListener("change", (e) => {
    const value = Number(e.target.value);
-   valueSpeed.innerText = FPS = value;
+   valueSpeed.innerText = FPS = world.fps = value;
    ani.updateFPS(FPS);
 });
 

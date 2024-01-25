@@ -1,8 +1,9 @@
 class World {
-   constructor(ww, wh, s, threshold = 2) {
+   constructor(ww, wh, s, threshold = 2, fps) {
       this.ww = ww;
       this.wh = wh;
       this.s = s;
+      this.fps = fps;
 
       this.grid = [];
       this.topSands = [];
@@ -92,10 +93,12 @@ class World {
    }
 
    draw(c) {
+      c.fillStyle = `rgba(0, 0, 0, ${map(this.fps, 1, 120, 0.95, 0.7)})`
       for (let i = 0; i < this.ww; i++) {
-         c.clearRect(i * this.s, 0, this.s, this.topSands[i] * this.s);
+         c.fillRect(i * this.s, 0, this.s, this.topSands[i] * this.s);
       }
 
+      // c.globalAlpha = 1;
       for (let i = 0; i < this.ww; i++) {
          for (let j = 0; j < this.topSands[i]; j++) {
             if (this.grid[j][i] !== 0) {

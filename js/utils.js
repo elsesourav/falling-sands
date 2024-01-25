@@ -21,7 +21,7 @@ Math.rnd = (start = 0, end = 1, int_floor = false) => {
 (0 start) -------.------ (10 end) input . = 5
 (10 min) ----------------.---------------- (30 max) output . = 20
 */
-Math.map = (point, start, end, min, max) => {
+const map = (point, start, end, min, max) => {
    return ((max - min) * (point - start) / (end - start)) + min;
 }
 

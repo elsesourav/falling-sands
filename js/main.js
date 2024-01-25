@@ -14,7 +14,7 @@ cvs.width = WIN_W;
 cvs.height = WIN_H;
 
 const ani = new Animation(FPS, animate);
-let world = new World(CVS_WIDTH, CVS_HEIGHT, SCALE_SIZE, threshold);
+let world = new World(CVS_WIDTH, CVS_HEIGHT, SCALE_SIZE, threshold, FPS);
 
 function animate() {
    world.update();
